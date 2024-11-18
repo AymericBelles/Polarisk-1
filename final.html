@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vos Informations</title>
+    <style>
+
+        /* Appliquer la police à tous les textes */
+        body, h1, h2, h3, p, .departement-title, .risk-label, .contact p {
+            font-family: 'ParOf-FulFa-Pro', Arial, sans-serif;
+        }
+               /* Ajustement du body */
+               body {
+                font-family: Arial, sans-serif;
+                background-color: #d5e7fb;
+                margin: 0;
+                padding-top: 80px; /* Espace réservé pour le header */
+                display: flex;
+                justify-content: center;
+                align-items: flex-start; /* Aligne le contenu en haut */
+                height: 100vh;
+                box-sizing: border-box;
+                overflow-y: auto; /* Activer le défilement si nécessaire */
+            }
+            
+            /* Style pour le header */
+            .main-header {
+                position: fixed; /* Header fixe */
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                display: flex;
+                align-items: center;
+                padding: 10px 20px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                box-sizing: border-box;
+            }
+            .main-header img {
+                height: 50px;
+                margin-right: 15px;
+            }
+            .main-header h1 {
+                font-size: 24px;
+                color: #003366;
+                margin: 0;
+                font-weight: bold;
+            }
+            
+            /* Conteneur principal */
+            .full-container {
+                background-color: #d5e7fb;
+                width: 800px;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+            .container {
+                padding: 00px;
+                background-color: #f0f4ff;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+                margin-bottom: 20px;
+            }
+            
+            /* En-tête pour chaque section */
+            .header {
+                background-color: #3369ff;
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: left;
+                font-size: 20px;
+            }
+    
+            /* Contenu et sections */
+            .content {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                padding: 20px;
+            }
+            .section {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 10px;
+                width: 48%;
+                text-align: left;
+            }
+        .departement-title {
+            font-size: 16px; /* Uniformiser la taille des titres */
+            color: #003366;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-weight: bold; /* Ajouter un poids de police en gras */
+        }
+        .culture-title {
+            font-size: 16px; /* Uniformiser la taille des titres */
+            color: #003366;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-weight: bold; /* Ajouter un poids de police en gras */
+        }
+        .departement-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: flex-end; /* Aligner à droite */
+        }
+        .map-container {
+            width: 150px; /* Agrandir la carte */
+            height: 150px; /* Agrandir la carte */
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+            margin-right: 40px; /* Marge à droite de la carte */
+        }
+        .departement-name {
+            font-size: 18px;
+            color: #003366;
+            font-weight: bold;
+        }
+        .chart-section {
+            display: flex;
+            align-items: center;
+        }
+        .chart-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .chart {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .chart-center {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+        .legend {
+            position: relative;
+            list-style: none;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 14px;
+        }
+        .legend li {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+        .legend .color-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .color-ble { background-color: #3369ff; }
+        .color-mais { background-color: #ffcc00; }
+        .color-avoine { background-color: #ff8066; }
+        .color-orge { background-color: #66cc99; }
+        .risks {
+            flex: 1;
+            background-color: #ffffff; /* Boîte avec les données en blanc */
+            color: #0b3d91; /* Texte en bleu très foncé */
+            padding: 15px;
+            border-radius: 10px; /* Réduit le rayon des coins */
+            margin-left: 20px; /* Ajout de marge à droite et à gauche */
+            margin-bottom: 20px; /* Ajout d'une marge en bas des boîtes */
+            text-align: left; /* Alignement à gauche */
+        }
+        .risk-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px; /* Ajustement de l'espace à l'intérieur des éléments de risque */
+            margin-bottom: 10px;
+            background-color: #ffffff; /* Fond des éléments de données en blanc */
+            border-radius: 10px; /* Réduit le rayon des coins */
+            border: 1px solid #b3c7f2; /* Bordure bleu clair */
+            color: #333;
+            flex-grow: 1;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .risk-item:last-child {
+            margin-bottom: 0;
+        }
+        .risk-indicator {
+            width: 21.6px; /* Taille des cercles réduite de 10 % */
+            height: 21.6px; /* 21.6px correspond à 90 % de 24px */
+            border-radius: 50%;
+            border: 2px solid #b3c7f2; /* Bordure bleu clair */
+            margin-right: 20px; /* Espace augmenté de 20 % (de 10px à 12px) */
+        }
+        .risk-current { background-color: #4caf50; }
+        .risk-exceptional { background-color: #ffc107; }
+        .risk-catastrophic { background-color: #f44336; }
+        .risk-label {
+            font-size: 12px; /* Réduction de la taille du texte des labels */
+            text-align: left; /* Alignement à gauche des labels */
+            flex: 1; /* Permet aux labels de prendre l'espace disponible */
+            color: #0b3d91; /* Couleur bleu foncé */
+            font-weight: bold; /* Texte en gras */
+        }
+        .risk-amount {
+            font-size: 16px; /* Réduction de la taille du texte des montants */
+            font-weight: bold; /* Texte en gras */
+            color: #0b3d91; /* Couleur bleu foncé */
+            text-align: right; /* Alignement à droite des montants */
+        }
+        .contact {
+            flex: 1;
+            background-color: #ffffff; /* Boîte avec les données en blanc */
+            color: #0b3d91; /* Texte en bleu très foncé */
+            padding: 15px;
+            border-radius: 10px; /* Réduit le rayon des coins */
+            margin-right: 20px; /* Ajout de marge à droite et à gauche */
+            margin-bottom: 20px; /* Ajout d'une marge en bas des boîtes */
+            /* border: 1px solid #b3c7f2;  Retrait de la bordure */
+        }
+        .contact h3 {
+            font-size: 14px; /* Taille du titre dans la boîte */
+            margin-bottom: 50px;
+            text-align: left; /* Alignement à gauche du titre de la boîte de contact */
+        }
+        .risks h3 {
+            font-size: 14px; /* Réduction de la taille du titre pour qu'il corresponde à celui de la boîte de contact */
+            margin-bottom: 50px; /* Marge en bas du titre */
+            text-align: left; /* Alignement à gauche du titre des risques */
+        }
+        .contact p {
+            font-size: 12px; /* Réduction de la taille du texte dans la boîte de contact */
+            line-height: 1.6;
+        }
+        .contact p strong {
+            font-weight: bold;
+        }
+        .conditions-box {
+            background-color: #3366ff; /* Couleur de fond principale */
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 20px auto;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        .conditions-box h2 {
+            margin-top: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête principale -->
+       <header class="main-header">
+           <img src="Images html/logo.png" alt="Logo Atekka"/>
+           <h1>Atekka</h1>
+       </header>
+       <div class="full-container">
+           <div class="container">
+               <div class="header">Vos informations</div>
+               <div class="content">
+                   <div class="section">
+                       <h2 class="departement-title">Département</h2>
+                       <div class="departement-info">
+                           <div id="department-name" class="departement-name"></div>
+                           <div id="map-container" class="map-container"></div>
+                       </div>
+                   </div>
+                   <div class="section chart-section">
+                       <div style="padding: 0;">
+                           <h2 class="culture-title">Cultures et Surfaces</h2>
+                           <div class="chart-container">
+                               <canvas id="myChart" class="chart"></canvas>
+                               <div class="chart-center"></div>
+                           </div>
+                       </div>
+                       <ul class="legend" id="legend"></ul>
+                   </div>
+               </div>
+           </div>
+           <div class="container">
+               <div class="header">Votre étude</div>
+               <div class="content">
+                   <div class="risks">
+                       <h3>Les risques auxquels vous êtes exposés</h3>
+                       <div id="risk-current" class="risk-item">
+                           <div class="risk-indicator risk-current"></div>
+                           <span class="risk-label">Risque courant</span>
+                           <span class="risk-amount" id="current-risk-amount"></span>
+                       </div>
+                       <div id="risk-exceptional" class="risk-item">
+                           <div class="risk-indicator risk-exceptional"></div>
+                           <span class="risk-label">Risque exceptionnel</span>
+                           <span class="risk-amount" id="exceptional-risk-amount"></span>
+                       </div>
+                       <div id="risk-catastrophic" class="risk-item">
+                           <div class="risk-indicator risk-catastrophic"></div>
+                           <span class="risk-label">Risque catastrophique</span>
+                           <span class="risk-amount" id="catastrophic-risk-amount"></span>
+                       </div>
+                   </div>
+                   <div class="contact">
+                       <h3>Pour approfondir cette étude</h3>
+                       <p>
+                           Pour une étude plus complète des risques auxquels vous êtes exposés, vous pouvez vous rapprocher de votre coopérative ou de votre négoce s'ils sont partenaires d'Atekka. Dans le cas contraire, vous pouvez contacter notre service commercial au <strong>09 78 80 00 52</strong> ou par email à <a href="mailto:contact@atekka.fr" style="color: #2466f2;">contact@atekka.fr</a>.
+                       </p>
+                       <p>
+                           Atekka et ses partenaires peuvent vous proposer, selon votre situation, des solutions permettant de faire face aux risques climatiques, aux risques de marché des matières agricoles, ou aux risques de trésorerie auxquels votre exploitation agricole peut être confrontée.
+                       </p>
+                   </div>
+               </div>
+           </div>
+           <div class="conditions-box">
+               <h2>Conditions</h2>
+               <p>
+                   Cette étude de risque se base sur un modèle d'analyse statistique simplifié développé par Atekka, et repose sur des hypothèses qui peuvent différer de vos données réelles. Elle vous est fournie à titre gracieux et purement informatif, sans aucune garantie ni sans qu'Atekka n'accepte de responsabilité pour l'usage que vous en feriez. Cette étude vous est fournie à titre purement personnel, et toute utilisation à des fins commerciales ou académiques est interdite.
+               </p>
+           </div>
+       </div>
+
+    <!-- Script Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        async function loadJSONData() {
+            try {
+                const [inputDataResponse, outputDataResponse] = await Promise.all([
+                    fetch('input_data.json'),
+                    fetch('output_ca_brut_et_risques.json')
+                ]);
+        
+                const inputData = await inputDataResponse.json();
+                const outputData = await outputDataResponse.json();
+        
+                // Vérification du contenu des données
+                console.log('Données JSON chargées:', { inputData, outputData });
+        
+                // Si les données sont valides, appeler initializePage
+                if (inputData && outputData) {
+                    initializePage(inputData, outputData);
+                } else {
+                    console.error('Les données JSON sont incorrectes ou vides');
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des fichiers JSON :', error);
+            }
+        }
+    
+        function initializePage(inputData, outputData) {
+            // Vérification de la structure des données
+            if (!inputData || !inputData[0]) {
+                console.error('Données JSON manquantes ou incorrectes dans input_data');
+                return;
+            }
+            if (!outputData || !outputData[1]) {
+                console.error('Données JSON manquantes ou incorrectes dans output_ca_brut_et_risques');
+                return;
+            }
+
+            // Log pour confirmer que les données sont bien présentes
+            console.log('Données d\'entrée:', inputData[0]);
+            console.log('Données de sortie:', outputData[1]);
+
+            // Chargement des informations du département
+            const departmentNames = {
+                1: "Ain",
+                2: "Aisne",
+                14: "Calvados", // Exemple, à compléter avec vos départements
+            };
+    
+            const dptNumber = inputData[0].dpt;
+            const dptName = departmentNames[dptNumber] || `Département ${dptNumber}`;
+            document.getElementById("department-name").textContent = `${dptName} (${dptNumber})`;
+            document.getElementById("map-container").style.backgroundImage = `url('Images html/${dptNumber}.png')`;
+    
+            // Préparation des données des cultures et surfaces
+            const culturesData = {
+                labels: Object.keys(inputData[0]).filter(key => key !== "apikey" && key !== "dpt"),
+                values: Object.values(inputData[0]).filter((_, index) => index > 1)
+            };
+    
+            // Graphique Doughnut avec Chart.js
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: culturesData.labels,
+                    datasets: [{
+                        data: culturesData.values,
+                        backgroundColor: culturesData.labels.map((_, i) => `hsl(${i * 20}, 70%, 60%)`),
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '60%',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+    
+            // Légende
+            const legendContainer = document.getElementById("legend");
+            culturesData.labels.forEach((culture, index) => {
+                const item = document.createElement("li");
+                item.innerHTML = `<span class="color-dot" style="background-color:hsl(${index * 20}, 70%, 60%)"></span>${culture} - ${culturesData.values[index]}ha`;
+                legendContainer.appendChild(item);
+            });
+    
+            // Affichage des risques
+            document.getElementById("current-risk-amount").textContent = `${outputData[1].Col2} €`;
+            document.getElementById("exceptional-risk-amount").textContent = `${outputData[1].Col3} €`;
+            document.getElementById("catastrophic-risk-amount").textContent = `${outputData[1].Col4} €`;
+        }
+    
+        document.addEventListener("DOMContentLoaded", loadJSONData);
+    </script>
+</body>
+</html>

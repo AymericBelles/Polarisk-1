@@ -1,0 +1,38 @@
+[
+  {
+    "Risque Courant": 0.14,
+    "Risque Exceptionnel": 0.18,
+    "Risque Catastrophique": 0.19,
+    "_row": "Exploitation"
+  },
+  {
+    "Risque Courant": 0.24,
+    "Risque Exceptionnel": 0.28,
+    "Risque Catastrophique": 0.3,
+    "_row": "Moyenne départementale"
+  },
+  {
+    "Risque Courant": 0.05,
+    "Risque Exceptionnel": 0.07,
+    "Risque Catastrophique": 0.08,
+    "_row": "Risque avec franchise à 15%"
+  },
+  {
+    "Risque Courant": 0.06,
+    "Risque Exceptionnel": 0.09,
+    "Risque Catastrophique": 0.11,
+    "_row": "Risque avec franchise à 20%"
+  },
+  {
+    "Risque Courant": 0.07,
+    "Risque Exceptionnel": 0.11,
+    "Risque Catastrophique": 0.13,
+    "_row": "Risque avec franchise à 25%"
+  },
+  {
+    "Risque Courant": 0.1,
+    "Risque Exceptionnel": 0.13,
+    "Risque Catastrophique": 0.15,
+    "_row": "Risque avec franchise à 30%"
+  }
+]
